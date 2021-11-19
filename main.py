@@ -1,5 +1,6 @@
 import pygame
 from tools import quit_game
+from ball import Ball
 
 WIDTH = 800
 HEIGHT = 800
