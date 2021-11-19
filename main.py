@@ -1,9 +1,14 @@
 import pygame
 from tools import quit_game
 
-WIDTH = 1000
-HEIGHT = 1000
+WIDTH = 800
+HEIGHT = 800
 
 pygame.init()
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            quit_game()
