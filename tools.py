@@ -14,8 +14,8 @@ def draw_screen(window, wall_list, ball):
     window.fill(GREY)
 
     for wall in wall_list:
-        pygame.draw.line(window, WHITE, wall.point_a, wall.point_b, 5)
+        window.blit(wall.surface, (wall.x1, wall.y1))
 
-    window.blit(ball.sprite, ball.position)
+    window.blit(ball.sprite, (ball.x, ball.y))
 
     pygame.display.update()

@@ -8,6 +8,24 @@ BALL_SPRITE = pygame.image.load("assets/ball.png")
 
 class Ball:
     def __init__(self):
-        self.position = (400, 400)
-        self.speed = pygame.math.Vector2(0, 0)
+        self.x, self.y = (500, 500)
+        self.speed = pygame.math.Vector2(5, 5)
         self.sprite = BALL_SPRITE
+
+    def update_position(self, wall_list):
+        new_x = self.x + self.speed.x
+        new_y = self.y + self.speed.y
+
+        collision = self.detect_collision(wall_list, new_x, new_y)
+        if collision is None:
+            self.x = new_x
+            self.y = new_y
+
+    def detect_collision(self, wall_list, ball_x, ball_y):
+        ball_mask = pygame.mask.from_surface(self.sprite)
+        for wall in wall_list:
+            poi = ball_mask.overlap(wall.mask, (int(wall.x1 - ball_x), int(wall.y1 - ball_y)))
+            print(poi)
+            if poi is not None:
+                return wall
+        return None

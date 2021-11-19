@@ -19,6 +19,8 @@ wall_list = [Wall((20, 20), (WIDTH - 20, 20)), Wall((WIDTH - 20, 20), (WIDTH - 2
 while True:
     clock.tick(30)
 
+    ball.update_position(wall_list)
+
     draw_screen(window, wall_list, ball)
 
     for event in pygame.event.get():
