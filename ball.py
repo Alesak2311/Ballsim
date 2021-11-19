@@ -2,7 +2,8 @@ import pygame
 
 RED = (255, 0, 0)
 
-BALL_SPRITE = pygame.draw.circle(pygame.Surface((10, 10)), RED, (5, 5), 5)
+BALL_RADIUS = 10
+BALL_SPRITE = pygame.image.load("assets/ball.png")
 
 
 class Ball:
