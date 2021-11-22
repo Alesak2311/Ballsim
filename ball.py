@@ -17,15 +17,19 @@ class Ball:
         new_y = self.y + self.speed.y
 
         collision = self.detect_collision(wall_list, new_x, new_y)
+
         if collision is None:
             self.x = new_x
             self.y = new_y
+        else:
+            self.speed = self.speed.reflect(collision)
+            self.x += self.speed.x
+            self.y += self.speed.y
 
     def detect_collision(self, wall_list, ball_x, ball_y):
         ball_mask = pygame.mask.from_surface(self.sprite)
         for wall in wall_list:
             poi = ball_mask.overlap(wall.mask, (int(wall.x1 - ball_x), int(wall.y1 - ball_y)))
-            print(poi)
             if poi is not None:
-                return wall
-        return None
+                return wall.normal_vector
+        return
