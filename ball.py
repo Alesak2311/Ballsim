@@ -1,4 +1,5 @@
 import pygame
+from physics import reflect
 
 RED = (255, 0, 0)
 
@@ -8,8 +9,8 @@ BALL_SPRITE = pygame.image.load("assets/ball.png")
 
 class Ball:
     def __init__(self):
-        self.x, self.y = (500, 500)
-        self.speed = pygame.math.Vector2(5, 5)
+        self.x, self.y = (400, 200)
+        self.speed = pygame.math.Vector2(20, 0)
         self.sprite = BALL_SPRITE
 
     def update_position(self, wall_list):
@@ -22,9 +23,7 @@ class Ball:
             self.x = new_x
             self.y = new_y
         else:
-            self.speed = self.speed.reflect(collision)
-            self.x += self.speed.x
-            self.y += self.speed.y
+            self.speed, self.x, self.y = reflect(self, collision)
 
     def detect_collision(self, wall_list, ball_x, ball_y):
         ball_mask = pygame.mask.from_surface(self.sprite)
