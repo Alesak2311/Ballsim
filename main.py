@@ -2,7 +2,7 @@ import pygame
 from tools import quit_game, draw_screen
 from ball import Ball
 from wall import Wall
-from physics import gravity
+from physics import gravity, push_ball
 
 WIDTH = 800
 HEIGHT = 800
@@ -18,7 +18,7 @@ wall_list = [Wall((20, 20), (WIDTH - 20, 20)), Wall((WIDTH - 20, 20), (WIDTH - 2
              Wall((WIDTH - 20, HEIGHT - 20), (20, HEIGHT - 20)), Wall((20, HEIGHT - 20), (20, 20))]
 
 while True:
-    clock.tick(30)
+    clock.tick(60)
 
     gravity(ball)
     ball.update_position(wall_list)
@@ -28,3 +28,8 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit_game()
+
+        if event.type == pygame.KEYDOWN:
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_SPACE]:
+                push_ball(ball)

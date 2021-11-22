@@ -1,3 +1,4 @@
+import random
 
 GRAVITY = 1
 ELASTICITY = 0.8
@@ -19,3 +20,8 @@ def reflect(ball, wall):
     ball.y += ball.speed.y
 
     return ball.speed, ball.x, ball.y
+
+
+def push_ball(ball):
+    ball.speed.from_polar((30, random.randint(0, 360)))
+    print(ball.speed.as_polar())
