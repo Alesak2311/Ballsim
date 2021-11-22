@@ -10,7 +10,9 @@ def gravity(ball):
 def reflect(ball, wall):
     ball.speed = ball.speed.reflect(wall)
 
-    new_length = ball.speed.length() * ELASTICITY
+    new_length = round(ball.speed.length() * ELASTICITY, 2)
+    if new_length < 4.5:
+        new_length = 0
     ball.speed.scale_to_length(new_length)
 
     ball.x += ball.speed.x
