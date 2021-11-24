@@ -1,6 +1,5 @@
 import pygame
 from physics import reflect
-from tools import quit_game
 
 RED = (255, 0, 0)
 

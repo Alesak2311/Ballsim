@@ -1,4 +1,3 @@
-
 GRAVITY = 1
 ELASTICITY = 0.8
 
@@ -23,4 +22,3 @@ def reflect(ball, wall):
 
 def push_ball(ball):
     ball.frozen = False
-    print(ball.speed.as_polar())

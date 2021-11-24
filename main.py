@@ -1,5 +1,5 @@
 import pygame
-from tools import quit_game, draw_screen
+from tools import quit_game, draw_screen, blit_text_center
 from ball import Ball
 from wall import Wall, Hoop
 from physics import gravity, push_ball
@@ -30,6 +30,8 @@ while True:
 
     if ball.detect_hoop(hoop) is not None:
         while True:
+            blit_text_center(window, "Score!")
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     quit_game()
