@@ -8,6 +8,22 @@ WIDTH = 800
 HEIGHT = 800
 
 
+def simulation(window, wall_list, hoop, ball):
+    gravity(ball)
+    ball.update_position(wall_list)
+    draw_screen(window, wall_list, hoop, ball)
+
+
+def check_hoop(window, hoop, ball):
+    if ball.detect_hoop(hoop) is not None:
+        while True:
+            blit_text_center(window, "Score!")
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit_game()
+
+
 def main():
     pygame.init()
 
@@ -25,18 +41,9 @@ def main():
     while True:
         clock.tick(60)
 
-        gravity(ball)
-        ball.update_position(wall_list)
+        simulation(window, wall_list, hoop, ball)
 
-        draw_screen(window, wall_list, hoop, ball)
-
-        if ball.detect_hoop(hoop) is not None:
-            while True:
-                blit_text_center(window, "Score!")
-
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        quit_game()
+        check_hoop(window, hoop, ball)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
