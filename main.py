@@ -28,6 +28,12 @@ while True:
 
     draw_screen(window, wall_list, hoop, ball)
 
+    if ball.detect_hoop(hoop) is not None:
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit_game()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit_game()

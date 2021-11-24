@@ -1,5 +1,6 @@
 import pygame
 from physics import reflect
+from tools import quit_game
 
 RED = (255, 0, 0)
 
@@ -9,7 +10,7 @@ BALL_SPRITE = pygame.image.load("assets/ball.png")
 
 class Ball:
     def __init__(self):
-        self.x, self.y = (100, 700)
+        self.x, self.y = (700, 100)
         self.speed = pygame.math.Vector2(0, 0)
         self.sprite = BALL_SPRITE
         self.frozen = True
@@ -36,3 +37,9 @@ class Ball:
             if poi is not None:
                 return wall.normal_vector
         return
+
+    def detect_hoop(self, hoop,):
+        ball_mask = pygame.mask.from_surface(self.sprite)
+        poi = ball_mask.overlap(hoop.mask, (int(hoop.x1 - self.x), int(hoop.y1 - self.y)))
+
+        return poi

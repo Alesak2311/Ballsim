@@ -28,3 +28,5 @@ class Hoop:
 
         self.surface = pygame.Surface((max(5, self.x2 - self.x1 - 5), max(5, self.y2 - self.y1)))
         self.surface.fill(GREY)
+
+        self.mask = pygame.mask.from_surface(self.surface)
