@@ -9,11 +9,15 @@ BALL_SPRITE = pygame.image.load("assets/ball.png")
 
 class Ball:
     def __init__(self):
-        self.x, self.y = (400, 700)
+        self.x, self.y = (100, 700)
         self.speed = pygame.math.Vector2(0, 0)
         self.sprite = BALL_SPRITE
+        self.frozen = True
 
     def update_position(self, wall_list):
+        if self.frozen:
+            self.speed.scale_to_length(0)
+
         new_x = self.x + self.speed.x
         new_y = self.y + self.speed.y
 
