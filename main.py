@@ -43,6 +43,38 @@ def choose_angle(window, wall_list, hoop, ball):
     return angle
 
 
+def choose_power(window, wall_list, hoop, ball):
+    power = 0
+    ascending = True
+
+    done = False
+    while not done:
+        clock.tick(30)
+
+        draw_screen(window, wall_list, hoop, ball)
+        blit_text_center(window, f"Power: {power}")
+
+        if ascending:
+            power += 1
+            if power >= 20:
+                ascending = False
+        else:
+            power -= 1
+            if power <= 0:
+                ascending = True
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit_game()
+
+            if event.type == pygame.KEYDOWN:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_SPACE]:
+                    done = True
+                    break
+    return power
+
+
 def check_hoop(window, hoop, ball):
     if ball.detect_hoop(hoop) is not None:
         while True:
@@ -87,7 +119,8 @@ def main():
     ball = Ball()
     hoop = Hoop((WIDTH - 120, 300), (WIDTH - 70, 300), wall_list)
 
-    choose_angle(window, wall_list, hoop, ball)
+    shot_angle = choose_angle(window, wall_list, hoop, ball)
+    power = choose_power(window, wall_list, hoop, ball)
 
     while True:
         simulation(window, wall_list, hoop, ball)
