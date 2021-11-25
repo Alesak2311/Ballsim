@@ -1,5 +1,5 @@
 import pygame
-from tools import quit_game, draw_screen, blit_text_center
+from tools import quit_game, draw_screen, blit_text_center, draw_angle_indicator
 from ball import Ball
 from wall import Wall, Hoop
 from physics import gravity, push_ball
@@ -11,23 +11,23 @@ clock = pygame.time.Clock()
 
 
 def choose_angle(window, wall_list, hoop, ball):
-    angle = 0
-    ascending = True
+    angle = 360
+    ascending = False
 
     done = False
     while not done:
-        clock.tick(30)
+        clock.tick(60)
 
         draw_screen(window, wall_list, hoop, ball)
-        blit_text_center(window, f"Choose angle: {angle}")
+        draw_angle_indicator(window, ball, angle)
 
         if ascending:
             angle += 1
-            if angle >= 90:
+            if angle >= 360:
                 ascending = False
         else:
             angle -= 1
-            if angle <= 0:
+            if angle <= 270:
                 ascending = True
 
         for event in pygame.event.get():

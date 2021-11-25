@@ -26,6 +26,16 @@ def draw_screen(window, wall_list, hoop, ball):
     pygame.display.update()
 
 
+def draw_angle_indicator(window, ball, angle):
+    start_pos = (ball.x + 10, ball.y + 10)
+    angle_vector = pygame.math.Vector2(0, 0)
+    angle_vector.from_polar((100, angle))
+    end_pos = (start_pos[0] + angle_vector.x, start_pos[1] + angle_vector.y)
+
+    pygame.draw.line(window, WHITE, start_pos, end_pos, 5)
+    pygame.display.update()
+
+
 def blit_text_center(window, string, font=MAIN_FONT):
     text = font.render(string, True, WHITE)
 

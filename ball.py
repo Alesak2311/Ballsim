@@ -3,13 +3,12 @@ from physics import reflect
 
 RED = (255, 0, 0)
 
-BALL_RADIUS = 10
 BALL_SPRITE = pygame.image.load("assets/ball.png")
 
 
 class Ball:
     def __init__(self):
-        self.x, self.y = (700, 100)
+        self.x, self.y = (100, 700)
         self.speed = pygame.math.Vector2(0, 0)
         self.sprite = BALL_SPRITE
         self.frozen = True
