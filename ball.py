@@ -11,7 +11,7 @@ class Ball:
         self.x, self.y = (100, 700)
         self.speed = pygame.math.Vector2(0, 0)
         self.sprite = BALL_SPRITE
-        self.frozen = True
+        self.frozen = False
 
     def update_position(self, wall_list):
         if self.frozen:

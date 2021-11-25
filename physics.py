@@ -1,4 +1,4 @@
-GRAVITY = 1
+GRAVITY = 0.5
 ELASTICITY = 0.8
 
 

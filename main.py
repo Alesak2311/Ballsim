@@ -56,7 +56,7 @@ def choose_power(window, wall_list, hoop, ball):
 
         if ascending:
             power += 1
-            if power >= 20:
+            if power >= 40:
                 ascending = False
         else:
             power -= 1
@@ -120,7 +120,9 @@ def main():
     hoop = Hoop((WIDTH - 120, 300), (WIDTH - 70, 300), wall_list)
 
     shot_angle = choose_angle(window, wall_list, hoop, ball)
-    power = choose_power(window, wall_list, hoop, ball)
+    shot_power = choose_power(window, wall_list, hoop, ball)
+
+    ball.speed.from_polar((shot_power, shot_angle))
 
     while True:
         simulation(window, wall_list, hoop, ball)
