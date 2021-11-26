@@ -18,7 +18,3 @@ def reflect(ball, wall):
     ball.y += ball.speed.y
 
     return ball.speed, ball.x, ball.y
-
-
-def push_ball(ball):
-    ball.frozen = False

@@ -2,7 +2,7 @@ import pygame
 from tools import quit_game, draw_screen, blit_text_center, draw_angle_indicator
 from ball import Ball
 from wall import Wall, Hoop
-from physics import gravity, push_ball
+from physics import gravity
 
 WIDTH = 800
 HEIGHT = 800
@@ -76,23 +76,32 @@ def choose_power(window, wall_list, hoop, ball):
 
 
 def check_hoop(window, hoop, ball):
+    done = False
     if ball.detect_hoop(hoop) is not None:
-        while True:
+        while not done:
             blit_text_center(window, "Score!")
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     quit_game()
 
+                if event.type == pygame.KEYDOWN:
+                    keys = pygame.key.get_pressed()
+                    if keys[pygame.K_SPACE]:
+                        done = True
+                        break
+    return done
+
 
 def simulation(window, wall_list, hoop, ball):
-    while True:
+    done = False
+    while not done:
         clock.tick(60)
 
         gravity(ball)
         ball.update_position(wall_list)
 
-        check_hoop(window, hoop, ball)
+        done = check_hoop(window, hoop, ball)
 
         draw_screen(window, wall_list, hoop, ball)
 
@@ -103,7 +112,8 @@ def simulation(window, wall_list, hoop, ball):
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_SPACE]:
-                    push_ball(ball)
+                    done = True
+                    break
 
 
 def main():
@@ -115,16 +125,16 @@ def main():
                  Wall((WIDTH - 20, HEIGHT - 20), (20, HEIGHT - 20)), Wall((20, HEIGHT - 20), (20, 20)),
                  Wall((WIDTH - 50, 300), (WIDTH - 20, 300)), Wall((WIDTH - 50, 200), (WIDTH - 50, 350)),
                  Wall((WIDTH - 70, 290), (WIDTH - 50, 290))]
-
-    ball = Ball()
     hoop = Hoop((WIDTH - 120, 300), (WIDTH - 70, 300), wall_list)
 
-    shot_angle = choose_angle(window, wall_list, hoop, ball)
-    shot_power = choose_power(window, wall_list, hoop, ball)
-
-    ball.speed.from_polar((shot_power, shot_angle))
-
     while True:
+        ball = Ball()
+
+        shot_angle = choose_angle(window, wall_list, hoop, ball)
+        shot_power = choose_power(window, wall_list, hoop, ball)
+
+        ball.speed.from_polar((shot_power, shot_angle))
+
         simulation(window, wall_list, hoop, ball)
 
 
