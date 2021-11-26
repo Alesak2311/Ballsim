@@ -1,5 +1,5 @@
 import pygame
-from tools import quit_game, draw_screen, blit_text_center, draw_angle_indicator
+from tools import quit_game, draw_screen, blit_text_center, draw_angle_indicator, power_indicator
 from ball import Ball
 from wall import Wall, Hoop
 from physics import gravity
@@ -52,7 +52,7 @@ def choose_power(window, wall_list, hoop, ball):
         clock.tick(30)
 
         draw_screen(window, wall_list, hoop, ball)
-        blit_text_center(window, f"Power: {power}")
+        power_indicator(window, power)
 
         if ascending:
             power += 1

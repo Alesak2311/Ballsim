@@ -44,3 +44,16 @@ def blit_text_center(window, string, font=MAIN_FONT):
 
     window.blit(text, text_pos)
     pygame.display.update()
+
+
+def power_indicator(window, power):
+    window_w = window.get_width()
+    window_h = window.get_height()
+
+    text = MAIN_FONT.render("POWER INDICATOR", True, WHITE)
+    window.blit(text, (window_w - 340, window_h - 70))
+
+    pygame.draw.rect(window, WHITE, pygame.Rect(window_w - 340, window_h - 50, 300, 10), 1)
+    pygame.draw.rect(window, WHITE, pygame.Rect(window_w - 340, window_h - 50, power * 7.5, 10))
+
+    pygame.display.update()
